@@ -106,6 +106,13 @@ public class CacheManagerFactory {
     private final JGroupsConfigurator jGroupsConfigurator;
 
     public CacheManagerFactory(String config) {
+        if (config == null) {
+            remoteCacheManagerFuture = CompletableFutures.completedNull();
+            cacheManagerFuture = CompletableFutures.completedNull();
+            jGroupsConfigurator = null;
+            return;
+        }
+
         ConfigurationBuilderHolder builder = new ParserRegistry().parse(config);
         jGroupsConfigurator = JGroupsConfigurator.create(builder);
 

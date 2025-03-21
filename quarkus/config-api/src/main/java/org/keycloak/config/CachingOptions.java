@@ -23,6 +23,7 @@ public class CachingOptions {
     public static final String CACHE_REMOTE_USERNAME_PROPERTY = CACHE_REMOTE_PREFIX + "-username";
     public static final String CACHE_REMOTE_PASSWORD_PROPERTY = CACHE_REMOTE_PREFIX + "-password";
     public static final String CACHE_REMOTE_TLS_ENABLED_PROPERTY = CACHE_REMOTE_PREFIX + "-tls-enabled";
+    public static final String CACHE_PROPERTY = "cache";
 
     private static final String CACHE_METRICS_PREFIX = "cache-metrics";
     public static final String CACHE_METRICS_HISTOGRAMS_ENABLED_PROPERTY = CACHE_METRICS_PREFIX + "-histograms-enabled";
@@ -36,7 +37,7 @@ public class CachingOptions {
         local
     }
 
-    public static final Option<Mechanism> CACHE = new OptionBuilder<>("cache", Mechanism.class)
+    public static final Option<Mechanism> CACHE = new OptionBuilder<>(CACHE_PROPERTY, Mechanism.class)
             .category(OptionCategory.CACHE)
             .description("Defines the cache mechanism for high-availability. "
                     + "By default in production mode, a 'ispn' cache is used to create a cluster between multiple server nodes. "

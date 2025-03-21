@@ -695,7 +695,7 @@ class KeycloakProcessor {
             Map<Class<? extends Provider>, Map<String, ProviderFactory>> providers = new HashMap<>();
             List<ProviderFactory> loadedFactories = new ArrayList<>();
             String provider = Config.getProvider(spi.getName());
-
+            System.out.println("get provider for spi " + spi.getName() + ": " + provider);
             if (provider == null) {
                 loadedFactories.addAll(pm.load(spi));
             } else {

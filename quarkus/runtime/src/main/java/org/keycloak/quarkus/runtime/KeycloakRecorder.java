@@ -134,7 +134,8 @@ public class KeycloakRecorder {
         String configFile = getKcConfigValue("spi-connections-infinispan-quarkus-config-file").getValue();
 
         if (configFile == null) {
-            throw new IllegalArgumentException("Option 'configFile' needs to be specified");
+            logger.warn("No Infinispan configuration file specified. Disabling caching.");
+            return null;
         }
 
         Path configPath = Paths.get(configFile);

@@ -132,6 +132,8 @@ public class Profile {
         IPA_TUURA_FEDERATION("IPA-Tuura user federation provider", Type.EXPERIMENTAL),
 
         ROLLING_UPDATES_V1("Rolling Updates", Type.DEFAULT, 1),
+
+        CACHELESS("Disables Infinispan caching completely. Will negatively impact performance if not combined with other extensions.", Type.EXPERIMENTAL),
         ;
 
         private final Type type;

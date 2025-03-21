@@ -82,6 +82,7 @@ public class InfinispanClusterProviderFactory implements ClusterProviderFactory,
 
     @Override
     public ClusterProvider create(KeycloakSession session) {
+        logger.warn("InfinispanClusterProviderFactory create");
         lazyInit(session);
         String myAddress = InfinispanUtil.getTopologyInfo(session).getMyNodeName();
         return new InfinispanClusterProvider(clusterStartupTime, myAddress, crossDCAwareCacheFactory, notificationsManager, localExecutor);
@@ -168,10 +169,12 @@ public class InfinispanClusterProviderFactory implements ClusterProviderFactory,
 
     @Override
     public void init(Config.Scope config) {
+        logger.warn("InfinispanClusterProviderFactory init");
     }
 
     @Override
     public void postInit(KeycloakSessionFactory factory) {
+        logger.warn("InfinispanClusterProviderFactory postInit");
     }
 
 

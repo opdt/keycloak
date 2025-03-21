@@ -51,6 +51,7 @@ public class RemoteInfinispanClusterProviderFactory implements ClusterProviderFa
 
     @Override
     public ClusterProvider create(KeycloakSession session) {
+        logger.warn("RemoteClusterProviderFactory create");
         if (workCache == null) {
             // Keycloak does not ensure postInit() is invoked before create()
             lazyInit(session);
@@ -68,6 +69,7 @@ public class RemoteInfinispanClusterProviderFactory implements ClusterProviderFa
 
     @Override
     public void postInit(KeycloakSessionFactory factory) {
+        logger.warn("RemoteClusterProviderFactory postInit");
         try (var session = factory.create()) {
             lazyInit(session);
         }

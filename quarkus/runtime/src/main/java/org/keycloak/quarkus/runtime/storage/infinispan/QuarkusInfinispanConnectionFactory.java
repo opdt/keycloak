@@ -18,9 +18,14 @@
 package org.keycloak.quarkus.runtime.storage.infinispan;
 
 import org.infinispan.manager.EmbeddedCacheManager;
+import org.keycloak.connections.infinispan.NoopInfinispanConnectionProvider;
+import org.keycloak.config.CachingOptions;
 import org.keycloak.connections.infinispan.DefaultInfinispanConnectionProviderFactory;
+import org.keycloak.connections.infinispan.InfinispanConnectionProvider;
+import org.keycloak.models.KeycloakSession;
 import org.keycloak.provider.ProviderConfigProperty;
 import org.keycloak.provider.ProviderConfigurationBuilder;
+import org.keycloak.quarkus.runtime.configuration.Configuration;
 
 import java.util.List;
 
@@ -28,6 +33,11 @@ import java.util.List;
  * @author <a href="mailto:psilva@redhat.com">Pedro Igor</a>
  */
 public class QuarkusInfinispanConnectionFactory extends DefaultInfinispanConnectionProviderFactory {
+
+    @Override
+    public InfinispanConnectionProvider create(KeycloakSession session) {
+        return super.create(session);
+    }
 
     @Override
     protected EmbeddedCacheManager initContainerManaged(EmbeddedCacheManager cacheManager) {

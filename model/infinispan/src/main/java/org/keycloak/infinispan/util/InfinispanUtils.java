@@ -24,6 +24,7 @@ import org.keycloak.common.Profile;
 import org.keycloak.common.util.MultiSiteUtils;
 import org.keycloak.provider.ProviderConfigurationBuilder;
 
+import static org.keycloak.common.Profile.Feature.CACHELESS;
 import static org.keycloak.common.Profile.Feature.CLUSTERLESS;
 
 public final class InfinispanUtils {
@@ -40,14 +41,22 @@ public final class InfinispanUtils {
     // provider id for remote cache providers
     public static final String REMOTE_PROVIDER_ID = "remote";
 
+    // provider id for noop cache providers
+    public static final String NOOP_PROVIDER_ID = "noop";
+
     // true if running with external infinispan mode only
     public static boolean isRemoteInfinispan() {
-        return MultiSiteUtils.isMultiSiteEnabled() || Profile.isFeatureEnabled(CLUSTERLESS);
+        return (MultiSiteUtils.isMultiSiteEnabled() || Profile.isFeatureEnabled(CLUSTERLESS)) && !isNoopInfinispan();
     }
 
     // true if running with embedded caches.
     public static boolean isEmbeddedInfinispan() {
-        return !isRemoteInfinispan();
+        return !isRemoteInfinispan() && !isNoopInfinispan();
+    }
+
+    // true if caching is disabled
+    public static boolean isNoopInfinispan() {
+        return Profile.isFeatureEnabled(CACHELESS);
     }
 
     // ---- Retries on Error - Exponential Back Off ----
